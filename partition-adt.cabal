@@ -1,0 +1,41 @@
+name:                partition-adt
+version:             0.1.0.0
+synopsis:            A library for partitioning collections of ADTs
+                     based on data constructor.
+description:
+  This library is mostly an experiment in writing functions
+  over arbitrary algebraic datatypes, that reflect on the value
+  constructors of that type. See README.md for examples.
+homepage:            https://github.com/numberten/partition-adt
+license:             MIT
+license-file:        LICENSE
+author:              Jesse Frankley
+maintainer:          number.dot.ten@gmail.com
+build-type:          Simple
+cabal-version:       >=1.10
+
+extra-source-files:
+  README.md
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Partition
+  build-depends:       base >= 4.7 && < 5
+                     , containers
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+
+test-suite partition-adt-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , partition-adt
+                     , containers
+                     , HUnit
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/numberten/partition-adt
