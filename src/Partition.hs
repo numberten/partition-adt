@@ -19,7 +19,6 @@ import qualified Data.Map.Lazy as M
 -- Lists in returned map respect order of values in input list.
 --
 -- TODO:
---  - Make missing data constructors return an empty list.
 --  - Use a more restrictive type for map keys.
 --
 partitionADT :: Data a => [a] -> M.Map String [a]
