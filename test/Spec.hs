@@ -9,10 +9,10 @@ main = runTestTT partitionADTTests >> return ()
 
 partitionADTTests :: Test
 partitionADTTests = TestList [
-    makeTest ([] :: [Maybe (Maybe Bool)])  M.empty
+    makeTest ([] :: [Maybe (Maybe Bool)])
+  $   M.fromList [("Just",[]),("Nothing",[])]
 
-  , makeTest ([Left 10, Right 'a', Right 'b', Left 42, Right 'c'] :: [Either Int Char])  $
-      M.fromList [
+  , makeTest ([Left 10, Right 'a', Right 'b', Left 42, Right 'c'] :: [Either Int Char])  $   M.fromList [
                    ("Left", [Left 10, Left 42])
                  , ("Right",[Right 'a',Right 'b', Right 'c'])
                  ]

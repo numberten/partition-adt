@@ -23,9 +23,17 @@ import qualified Data.Map.Lazy as M
 --  - Use a more restrictive type for map keys.
 --
 partitionADT :: Data a => [a] -> M.Map String [a]
-partitionADT xs = M.map reverse $ go xs M.empty
+partitionADT xs = M.map reverse
+                $ go xs
+                $ foldr (\k m -> M.insert k [] m) M.empty
+                $ map show (constrs xs)
   where
     go [] acc = acc
     go (x:rest) acc = case (show $ toConstr x) `M.lookup` acc of
       Just vs -> go rest $ M.insert (show $ toConstr x) (x:vs) acc
       Nothing -> go rest $ M.insert (show $ toConstr x) [x] acc
+
+    constrs :: Data a => [a] -> [Constr]
+    constrs = constrs' undefined
+    constrs' :: Data a => a -> [a] -> [Constr]
+    constrs' bottom _ = dataTypeConstrs $ dataTypeOf bottom
